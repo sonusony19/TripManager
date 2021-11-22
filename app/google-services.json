@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566008547704",
+    "project_id": "trip-manager-e4ac1",
+    "storage_bucket": "trip-manager-e4ac1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566008547704:android:0b353f763e2ce80660a08d",
+        "android_client_info": {
+          "package_name": "com.trip.manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566008547704-b18c62kvl6u1tp5b4koqn9ar2tkkg4ja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3zNxowuadAU8Qb5q6TEl6rkT1JtbnvL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566008547704-b18c62kvl6u1tp5b4koqn9ar2tkkg4ja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
