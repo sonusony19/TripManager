@@ -15,8 +15,8 @@ android {
         minSdk 24
         targetSdk 31
         versionCode 1
-        versionName "1.0"
-
+        versionName "1.0.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,6 +32,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 
     applicationVariants.all { variant ->
@@ -88,4 +92,7 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
     //retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 }
