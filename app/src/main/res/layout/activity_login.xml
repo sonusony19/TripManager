@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="loginRequest"
+            type="com.trip.manager.ui.login.model.LoginRequest" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,13 +16,15 @@
         tools:context=".ui.login.view.LoginActivity">
 
         <EditText
-            android:id="@+id/email"
             android:layout_width="match_parent"
+            android:hint="@string/email"
+            android:text="@={loginRequest.email}"
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/password"
             android:layout_width="match_parent"
+            android:hint="@string/password"
+            android:text="@={loginRequest.password}"
             android:layout_height="wrap_content" />
 
         <Button

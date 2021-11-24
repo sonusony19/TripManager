@@ -9,6 +9,7 @@ import com.trip.manager.baseclasses.BaseActivity
 import com.trip.manager.databinding.ActivityLoginBinding
 import com.trip.manager.listeners.FirebaseAuthListener
 import com.trip.manager.ui.home.view.MainActivity
+import com.trip.manager.ui.login.model.LoginRequest
 import com.trip.manager.ui.login.viewmodel.LoginViewModel
 import com.trip.manager.utils.showShortToast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -25,21 +26,22 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun init() {
+        binding.loginRequest = LoginRequest()
         binding.login.setOnClickListener {
-            viewModel.validateCredentials(binding.email.text.toString(), binding.password.text.toString()).observe(
+            viewModel.validateCredentials(binding.loginRequest!!).observe(
                     this, validationObserver
             )
         }
     }
 
     private val validationObserver = Observer<String> {
-        if (it.isEmpty()) viewModel.loginUser(binding.email.text.toString(), binding.password.text.toString(), authListener)
+        if (it.isEmpty()) viewModel.loginUser(binding.loginRequest!!, authListener)
         else showShortToast(it)
     }
 
     private val authListener = object : FirebaseAuthListener {
         override fun onAuthSuccess() {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
             finish()
         }
 

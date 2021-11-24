@@ -12,7 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TripManager">
         <activity
+            android:name=".ui.trip.view.TripDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.view.CreateUserActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
             android:name=".ui.login.view.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.home.view.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splash.view.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.home.view.MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

@@ -2,4 +2,20 @@
     <string name="app_name">Trip Manager</string>
     <string name="please_enter_your_email">Please enter your email</string>
     <string name="please_enter_your_password">Please enter your password</string>
+    <string name="add_trip">Add trip</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="trip_name">Trip name</string>
+    <string name="please_enter_trip_name">Please enter trip name</string>
+    <string name="please_select_at_least_one_member">Please select atleast one member</string>
+    <string name="add_member">Add member</string>
+    <string name="please_enter_the_name">Please enter name</string>
+    <string name="please_enter_email">Please enter email</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="member">Members</string>
+    <string name="essentials">Essentials</string>
+    <string name="add_expense">Add transaction</string>
+    <string name="add_essentials">Add essentials</string>
+    <string name="add_your_essentials_here">Add your essentials here</string>
 </resources>
