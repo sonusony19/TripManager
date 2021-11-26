@@ -39,8 +39,11 @@ class AddTripFragment : BaseDialogFragment() {
         binding.addUser.setOnClickListener { startActivity(Intent(requireContext(), CreateUserActivity::class.java)) }
         binding.done.setOnClickListener {
             val trip = binding.trip ?: Trip()
-            trip.members = (binding.users.adapter as? UserAdapter)?.selectedUsers ?: arrayListOf()
-            viewModel.validateAndCreateTrip(trip).observe(viewLifecycleOwner, tripCreationObserver)
+            val members = arrayListOf<String>()
+            val selectedUsers = (binding.users.adapter as? UserAdapter)?.selectedUsers ?: arrayListOf()
+            selectedUsers.forEach { members.add(it.uid) }
+            trip.members = members
+            viewModel.validateAndCreateTrip(trip, selectedUsers).observe(viewLifecycleOwner, tripCreationObserver)
         }
     }
 

@@ -18,4 +18,17 @@
     <string name="add_expense">Add transaction</string>
     <string name="add_essentials">Add essentials</string>
     <string name="add_your_essentials_here">Add your essentials here</string>
+    <string name="essential_name">Essential name</string>
+    <string name="responsible_person">Responsible person</string>
+    <string name="please_enter_essential_name">Please enter essential name</string>
+    <string name="please_enter_the_name_of_responsible_person">Please enter the name of responsible person</string>
+    <string name="trip_members_will_show_here">Trip members will show here</string>
+    <string name="balance">Balance: %s</string>
+    <string name="transaction_name">Transaction name</string>
+    <string name="transaction_description">Transaction description</string>
+    <string name="amount">Amount</string>
+    <string name="credit">Credit</string>
+    <string name="debit">Debit</string>
+    <string name="please_enter_transaction_name">Please enter transaction name</string>
+    <string name="please_enter_the_amount">Please enter the amount</string>
 </resources>

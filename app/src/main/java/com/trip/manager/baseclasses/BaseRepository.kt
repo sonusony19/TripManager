@@ -11,10 +11,17 @@ open class BaseRepository {
 
     var databaseAndListener = hashMapOf<DatabaseReference, ValueEventListener>()
 
-    fun setObject(database: DatabaseReference, data: Any, firebaseDataListener: FirebaseDataListener<Any>) {
+    fun setObject(database: DatabaseReference, data: Any, firebaseDataListener: FirebaseDataListener<String>? = null) {
         database.setValue(data).addOnCompleteListener {
-            if (it.isSuccessful) firebaseDataListener.onSuccess(true)
-            else firebaseDataListener.onFailure(it.exception?.localizedMessage ?: databaseError)
+            if (it.isSuccessful) firebaseDataListener?.onSuccess(database.key ?: "")
+            else firebaseDataListener?.onFailure(it.exception?.localizedMessage ?: databaseError)
+        }
+    }
+
+    fun updateObject(database: DatabaseReference, data: Map<String, Any>, firebaseDataListener: FirebaseDataListener<String>? = null) {
+        database.updateChildren(data).addOnCompleteListener {
+            if (it.isSuccessful) firebaseDataListener?.onSuccess(database.key ?: "")
+            else firebaseDataListener?.onFailure(it.exception?.localizedMessage ?: databaseError)
         }
     }
 

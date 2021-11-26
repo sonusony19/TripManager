@@ -7,7 +7,7 @@ import com.trip.manager.ui.user.model.User
 
 class UserRepository(private val firebaseHelper: FirebaseHelper) : BaseRepository() {
 
-    fun createNewUser(user: User, listener: FirebaseDataListener<Any>) {
+    fun createNewUser(user: User, listener: FirebaseDataListener<String>) {
         var database = firebaseHelper.database.getReference("Users")
         database = database.push()
         user.uid = database.key ?: ""

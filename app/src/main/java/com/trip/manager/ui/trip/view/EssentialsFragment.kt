@@ -45,6 +45,9 @@ class EssentialsFragment : BaseFragment() {
 
     private fun init() {
         viewModel.essentialData.observe(viewLifecycleOwner, essentialsObserver)
+        binding.addEssentials.setOnClickListener {
+            AddEssentialFragment.newInstance(tripId).show(childFragmentManager, javaClass.simpleName)
+        }
     }
 
     private val essentialsObserver = Observer<Response<List<Essential>>> {

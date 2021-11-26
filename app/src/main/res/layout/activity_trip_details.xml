@@ -10,9 +10,10 @@
             type="com.trip.manager.ui.trip.model.Trip" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.trip.view.TripDetailsActivity">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -21,8 +22,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:orientation="vertical"
-            app:elevation="0dp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:elevation="0dp">
 
 
             <include
@@ -42,10 +42,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/app_bar" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </layout>

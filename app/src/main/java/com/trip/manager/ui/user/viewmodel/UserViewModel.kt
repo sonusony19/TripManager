@@ -21,8 +21,8 @@ class UserViewModel(private val repository: UserRepository) : BaseViewModel() {
             return MutableLiveData(Response(success = false, error = error))
         }
         val response = MutableLiveData<Response<Any>>()
-        repository.createNewUser(user, object : FirebaseDataListener<Any> {
-            override fun onSuccess(result: Any) {
+        repository.createNewUser(user, object : FirebaseDataListener<String> {
+            override fun onSuccess(result: String) {
                 response.value = Response(success = true, data = result)
             }
 

@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.trip.manager.R
+import com.trip.manager.adapters.MemberAdapter
 import com.trip.manager.baseclasses.BaseFragment
+import com.trip.manager.baseclasses.Response
 import com.trip.manager.databinding.FragmentMembersBinding
+import com.trip.manager.ui.trip.model.Member
 import com.trip.manager.ui.trip.viewmodel.TripViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -34,9 +38,24 @@ class MembersFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_members, container, false)
         viewModel = getViewModel(TripViewModel::class)
         init()
+        viewModel.getMembers(tripID)
         return binding.root
     }
 
-    private fun init() {}
+    private fun init() {
+        viewModel.memberData.observe(viewLifecycleOwner, memberObserver)
+        binding.addTransaction.setOnClickListener {
+            AddTransactionFragment.newInstance(tripID).show(childFragmentManager, javaClass.simpleName)
+        }
+    }
+
+    private val memberObserver = Observer<Response<List<Member>>> {
+        if (it.success && !it.data.isNullOrEmpty()) {
+            binding.noData.visibility = View.GONE
+            binding.members.adapter = MemberAdapter(requireContext(), it.data)
+        } else {
+            binding.noData.visibility = View.VISIBLE
+        }
+    }
 
 }
