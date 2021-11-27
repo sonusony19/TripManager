@@ -2,7 +2,6 @@ package com.trip.manager.ui.home.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,23 +16,15 @@ import com.trip.manager.ui.trip.model.Trip
 import com.trip.manager.ui.trip.view.AddTripFragment
 import com.trip.manager.utils.showShortToast
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MainActivity : BaseActivity() {
-    private lateinit var viewModel: MainViewModel
+class MainActivity : BaseActivity<MainViewModel>(MainViewModel::class) {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel = getViewModel(MainViewModel::class)
         init()
-        viewModel.getTrips()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("Sonu", "onResume: ${viewModel.getCount()}")
+        getData()
     }
 
     private fun init() {
@@ -44,13 +35,20 @@ class MainActivity : BaseActivity() {
         binding.addTrip.setOnClickListener { AddTripFragment().show(supportFragmentManager, javaClass.simpleName) }
     }
 
+    private fun getData() {
+        viewModel.loading.value = true
+        viewModel.getTrips()
+    }
+
     private fun logout() {
+        viewModel.removeListener()
         viewModel.logout()
         startActivity(Intent(this, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         finish()
     }
 
     private val tripObserver = Observer<Response<List<Trip>>> {
+        viewModel.loading.value = false
         it.data?.let { trips ->
             binding.trips.adapter = TripAdapter(this, trips)
         } ?: showError(it.error ?: "")

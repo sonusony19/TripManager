@@ -10,16 +10,13 @@ import com.trip.manager.databinding.ActivityCreateUserBinding
 import com.trip.manager.ui.user.model.User
 import com.trip.manager.ui.user.viewmodel.UserViewModel
 import com.trip.manager.utils.showShortToast
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class CreateUserActivity : BaseActivity() {
+class CreateUserActivity : BaseActivity<UserViewModel>(UserViewModel::class) {
     private lateinit var binding: ActivityCreateUserBinding
-    private lateinit var viewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_user)
-        viewModel = getViewModel(UserViewModel::class)
         init()
     }
 

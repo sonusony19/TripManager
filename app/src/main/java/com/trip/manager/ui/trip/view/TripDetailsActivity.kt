@@ -11,16 +11,13 @@ import com.trip.manager.databinding.ActivityTripDetailsBinding
 import com.trip.manager.ui.trip.model.Trip
 import com.trip.manager.ui.trip.viewmodel.TripViewModel
 import com.trip.manager.utils.showShortToast
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class TripDetailsActivity : BaseActivity() {
+class TripDetailsActivity : BaseActivity<TripViewModel>(TripViewModel::class) {
     private lateinit var binding: ActivityTripDetailsBinding
-    private lateinit var viewModel: TripViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_trip_details)
-        viewModel = getViewModel(TripViewModel::class)
         init()
         getData()
     }

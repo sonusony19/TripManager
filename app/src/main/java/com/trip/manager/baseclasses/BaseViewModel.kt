@@ -10,6 +10,7 @@ import org.koin.core.inject
 open class BaseViewModel : ViewModel(), KoinComponent {
     val firebaseHelper: FirebaseHelper by inject()
     val prefHelper: PrefHelper by inject()
+    var loading = MutableLiveData(false)
 
     fun checkLoginStatus() = MutableLiveData(firebaseHelper.auth.currentUser != null)
     fun logout() = firebaseHelper.auth.signOut()

@@ -7,15 +7,11 @@ import com.trip.manager.baseclasses.BaseActivity
 import com.trip.manager.baseclasses.BaseViewModel
 import com.trip.manager.ui.home.view.MainActivity
 import com.trip.manager.ui.login.view.LoginActivity
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : BaseActivity() {
-    private lateinit var viewModel: BaseViewModel
-
+class SplashActivity : BaseActivity<BaseViewModel>(BaseViewModel::class) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel(BaseViewModel::class)
         moveForward()
     }
 

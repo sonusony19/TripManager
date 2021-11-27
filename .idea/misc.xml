@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/drawable-v24/box_unchecked.xml" value="0.3435185185185185" />
+        <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/drawable-v24/splash_background.xml" value="0.22083333333333333" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/drawable/box_unchecked.xml" value="0.3435185185185185" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/drawable/white_rounded_background.xml" value="0.3435185185185185" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/activity_create_user.xml" value="0.22" />
@@ -16,10 +17,13 @@
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/fragment_add_trip.xml" value="0.3333333333333333" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/fragment_essentials.xml" value="0.3333333333333333" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/fragment_expense.xml" value="0.3802083333333333" />
+        <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/fragment_login.xml" value="0.3333333333333333" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/fragment_members.xml" value="0.3802083333333333" />
+        <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/loader_layout.xml" value="0.2898148148148148" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/member_layout.xml" value="0.3651041666666667" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/trip_layout.xml" value="0.3958333333333333" />
         <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/layout/user_item_view.xml" value="0.4466666666666667" />
+        <entry key="..\:/Workspace/Mine/TripManager/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22083333333333333" />
       </map>
     </option>
   </component>

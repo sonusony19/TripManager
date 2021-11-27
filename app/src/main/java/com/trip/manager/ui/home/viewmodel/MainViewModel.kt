@@ -23,10 +23,13 @@ class MainViewModel(private val repository: MainRepository) : BaseViewModel() {
         })
     }
 
+
     override fun onCleared() {
         super.onCleared()
-        repository.removeListener()
+        removeListener()
     }
 
-    fun getCount() = repository.databaseAndListener.keys.size
+    fun removeListener() {
+        repository.removeListener()
+    }
 }

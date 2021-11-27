@@ -31,4 +31,7 @@
     <string name="debit">Debit</string>
     <string name="please_enter_transaction_name">Please enter transaction name</string>
     <string name="please_enter_the_amount">Please enter the amount</string>
+    <string name="login">Login</string>
+    <string name="submit">Submit</string>
+    <string name="please_wait">Please wait…</string>
 </resources>
