@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/white_rounded_background"
+        android:orientation="vertical"
         tools:context=".ui.trip.view.TransactionFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +46,8 @@
             android:id="@+id/no_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="@dimen/_30sdp"
             android:fontFamily="@font/nunito_semibold"
             android:text="@string/all_your_transactions_will_be_here"
             android:visibility="gone"
@@ -63,6 +66,6 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:paddingVertical="@dimen/_5sdp"
                 android:text="@{member.getTotalBalance()}"
-                android:textColor='@{member.getTotalBalance().contains("-")? @android:color/holo_red_light : @android:color/holo_green_light }'
+                android:textColor='@{member.getTotalBalance().contains("-")? @android:color/holo_red_light : @android:color/holo_green_dark }'
                 android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>

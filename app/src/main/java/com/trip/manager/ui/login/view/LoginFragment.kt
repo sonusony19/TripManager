@@ -37,7 +37,7 @@ class LoginFragment(private val listener: View.OnClickListener) : BaseDialogFrag
     }
 
     private fun init() {
-        binding.loginRequest = LoginRequest()
+        binding.loginRequest = LoginRequest(email = "sonusony1997@gmail.com", password = "12345678")
         binding.login.setOnClickListener {
             viewModel.validateCredentials(binding.loginRequest!!).observe(this, validationObserver)
         }

@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@{transaction.type==TransactionType.CREDIT? @string/add_money : @string/add_expense}"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@{transaction.type==TransactionType.DEBIT? @android:color/holo_red_light: @android:color/holo_green_dark}"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/done"
