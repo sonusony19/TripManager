@@ -5,9 +5,7 @@
 
     <data>
 
-        <variable
-            name="transactionTypes"
-            type="com.trip.manager.utils.TransactionType" />
+        <import type="com.trip.manager.utils.TransactionType" />
 
         <variable
             name="transaction"
@@ -37,6 +35,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@{transaction.type==TransactionType.CREDIT? @string/add_money : @string/add_expense}"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/done"
+                app:layout_constraintStart_toStartOf="@id/back"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/done"
                 android:layout_width="wrap_content"
@@ -49,90 +59,130 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/transaction_name"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_14sdp"
-            android:background="@drawable/white_rounded_background"
-            android:elevation="10dp"
-            android:hint="@string/transaction_name"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:padding="@dimen/_12sdp"
-            android:text="@={transaction.title}"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/transaction_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/white_rounded_background"
-            android:elevation="10dp"
-            android:hint="@string/transaction_description"
-            android:imeOptions="actionNext"
-            android:inputType="textMultiLine"
-            android:padding="@dimen/_12sdp"
-            android:text="@={transaction.description}"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/transaction_name" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/white_rounded_background"
-            android:elevation="10dp"
-            android:hint="@string/amount"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:maxLength="10"
-            android:maxLines="1"
-            android:padding="@dimen/_12sdp"
-            android:text="@={transaction.amount}"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/transaction_description" />
 
-        <RadioGroup
-            android:id="@+id/transaction_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_14sdp"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/amount">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/transaction_name"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_14sdp"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="@{transaction.type.equals(transactionTypes.getCredit())}"
-                android:onClick="@{()->transaction.setType(transactionTypes.getCredit())}"
-                android:text="@string/credit" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:hint="@string/transaction_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:text="@={transaction.title}"
+                        android:textColor="@color/colorTextBlack" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checked="@{transaction.type.equals(transactionTypes.getDebit())}"
-                android:onClick="@{()->transaction.setType(transactionTypes.getDebit())}"
-                android:text="@string/debit" />
 
-        </RadioGroup>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/transaction_description"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_14sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/transaction_name">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/members"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_5sdp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/transaction_type" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:hint="@string/transaction_description"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine"
+                        android:text="@={transaction.description}"
+                        android:textColor="@color/colorTextBlack" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/amount"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_14sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/transaction_description">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:hint="@string/amount"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:text="@={transaction.amount}"
+                        android:textColor="@color/colorTextBlack" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/select_members"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toTopOf="@id/members"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/amount" />
+
+                <ToggleButton
+                    android:id="@+id/select_toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/white_rounded_background"
+                    android:checked="false"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/nunito_regular"
+                    android:padding="0dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorTextBlack"
+                    android:textOff="@string/select_all"
+                    android:textOn="@string/unselect_all"
+                    app:layout_constraintBottom_toTopOf="@id/members"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/amount" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/members"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/select_toggle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

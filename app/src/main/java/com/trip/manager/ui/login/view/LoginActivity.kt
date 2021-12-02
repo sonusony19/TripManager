@@ -19,6 +19,6 @@ class LoginActivity : BaseActivity<LoginViewModel>(LoginViewModel::class) {
 
     private fun openSheet() {
         binding.image.setGif(R.raw.out_of_office)
-        LoginFragment(viewModel) { onBackPressed() }.show(supportFragmentManager, "")
+        LoginFragment { onBackPressed() }.show(supportFragmentManager, "")
     }
 }

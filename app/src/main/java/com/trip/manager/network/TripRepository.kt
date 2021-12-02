@@ -10,6 +10,7 @@ import com.trip.manager.ui.trip.model.Trip
 import com.trip.manager.ui.user.model.User
 import com.trip.manager.utils.FirebasePaths
 import com.trip.manager.utils.TransactionType
+import com.trip.manager.utils.getDeviceModel
 import java.util.*
 
 class TripRepository(private val firebaseHelper: FirebaseHelper) : BaseRepository() {
@@ -26,8 +27,8 @@ class TripRepository(private val firebaseHelper: FirebaseHelper) : BaseRepositor
         listenToList(firebaseHelper.database.getReference(FirebasePaths.essentials).child(tripId), Essential::class.java, listener)
     }
 
-    fun getMembers(tripId: String, listener: FirebaseDataListener<List<Member>>) {
-        listenToList(firebaseHelper.database.getReference(FirebasePaths.members).child(tripId), Member::class.java, listener)
+    fun getMembers(tripId: String, once: Boolean, listener: FirebaseDataListener<List<Member>>) {
+        listenToList(firebaseHelper.database.getReference(FirebasePaths.members).child(tripId), Member::class.java, listener, once)
     }
 
     fun createNewTrip(trip: Trip, listener: FirebaseDataListener<String>) {
@@ -59,6 +60,7 @@ class TripRepository(private val firebaseHelper: FirebaseHelper) : BaseRepositor
             childDatabase = childDatabase.push()
             transaction.id = childDatabase.key ?: ""
             transaction.createdAt = Date().time
+            transaction.createdBy = getDeviceModel()
             setObject(childDatabase, transaction, listener)
         }
         val amount = if (transaction.type == TransactionType.CREDIT) transaction.amount.toDouble() else -transaction.amount.toDouble()
@@ -73,5 +75,32 @@ class TripRepository(private val firebaseHelper: FirebaseHelper) : BaseRepositor
             data["balance"] = it.balance + amount
             updateObject(childDatabase, data)
         }
+    }
+
+    fun getEssentialDetails(tripId: String, essentialId: String, listener: FirebaseDataListener<Essential>) {
+        listenToObject(firebaseHelper.database.getReference(FirebasePaths.essentials).child(tripId).child(essentialId), Essential::class.java, listener, true)
+    }
+
+    fun deleteEssential(tripID: String, essentialID: String, listener: FirebaseDataListener<Any>) {
+        val database = firebaseHelper.database.getReference(FirebasePaths.essentials).child(tripID).child(essentialID)
+        removeObject(database, listener)
+    }
+
+    fun updateEssential(tripId: String, essential: Essential, firebaseDataListener: FirebaseDataListener<String>) {
+        val database = firebaseHelper.database.getReference(FirebasePaths.essentials).child(tripId).child(essential.id)
+        val data = hashMapOf<String, Any>()
+        data["name"] = essential.name
+        data["updatedAt"] = Date().time
+        data["updatedBy"] = getDeviceModel()
+        if (essential.handledAt != null) {
+            data["handledAt"] = essential.handledAt!!
+            data["handledBy"] = essential.handledBy
+        }
+        updateObject(database, data, firebaseDataListener)
+    }
+
+    fun getTransactions(tripId: String, memberId: String, listener: FirebaseDataListener<List<Transaction>>) {
+        val database = firebaseHelper.database.getReference(FirebasePaths.transactions).child(tripId).child(memberId)
+        listenToList(database, Transaction::class.java, listener)
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,20 +18,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_14sdp"
-        android:layout_marginVertical="@dimen/_6sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
         android:background="@drawable/white_rounded_background"
         android:elevation="@dimen/_5sdp"
-        android:paddingHorizontal="@dimen/_12sdp">
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_5sdp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_image"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:contentDescription="@string/user_image"
+            android:src="@drawable/user_avatar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setUserImage="@{user.image}" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/_12sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:fontFamily="@font/nunito_semibold"
             android:text="@{user.name}"
+            android:textColor="@color/colorTextBlack"
             app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/checkbox"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/user_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Test" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/checkbox"

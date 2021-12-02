@@ -9,6 +9,7 @@ import com.trip.manager.ui.login.model.LoginRequest
 import com.trip.manager.utils.authError
 import com.trip.manager.utils.databaseError
 import org.koin.core.KoinComponent
+import java.util.*
 
 class FirebaseHelper : KoinComponent {
 
@@ -45,7 +46,7 @@ class FirebaseHelper : KoinComponent {
         val user = hashMapOf<String, Any>()
         user["uid"] = auth.currentUser!!.uid
         user["name"] = "Sonu Sony"
-        user["email"] = email
+        user["email"] = email.lowercase(Locale.ENGLISH)
         user["image"] = ""
         userDatabase.setValue(user).addOnCompleteListener {
             if (it.isSuccessful) listener.onAuthSuccess()

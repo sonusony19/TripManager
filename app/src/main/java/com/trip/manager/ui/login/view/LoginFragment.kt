@@ -18,7 +18,7 @@ import com.trip.manager.ui.login.model.LoginRequest
 import com.trip.manager.ui.login.viewmodel.LoginViewModel
 import com.trip.manager.utils.showShortToast
 
-class LoginFragment(private val viewModel: LoginViewModel, private val listener: View.OnClickListener) : BaseDialogFragment() {
+class LoginFragment(private val listener: View.OnClickListener) : BaseDialogFragment<LoginViewModel>(LoginViewModel::class) {
 
     private lateinit var binding: FragmentLoginBinding
     private var loggedIn: Boolean = false
@@ -33,6 +33,7 @@ class LoginFragment(private val viewModel: LoginViewModel, private val listener:
     override fun onShow(dialog: DialogInterface?) {
         super.onShow(dialog)
         (dialog as BottomSheetDialog).setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
     }
 
     private fun init() {

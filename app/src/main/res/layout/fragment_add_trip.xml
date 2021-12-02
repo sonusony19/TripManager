@@ -12,14 +12,15 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/white_rounded_background"
+        android:fillViewport="true"
         android:scrollbars="none"
         tools:context=".ui.trip.view.AddTripFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar"
@@ -38,6 +39,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/add_your_trip"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/done"
+                    app:layout_constraintStart_toStartOf="@id/back"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/done"
                     android:layout_width="wrap_content"
@@ -50,37 +63,118 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/trip_name"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/trip_name_layout"
+                style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_14sdp"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:hint="@string/trip_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:text="@={trip.name}"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/start_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/gray_box"
+                android:drawableEnd="@drawable/start_circle"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center_vertical"
+                android:hint="@string/start_date_of_trip"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/trip_name_layout"
+                app:setDate="@{trip.startAt}" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/end_date"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/gray_box"
+                android:drawableEnd="@drawable/end_circle"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center_vertical"
+                android:hint="@string/end_date_of_trip"
+                android:paddingHorizontal="@dimen/_14sdp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@id/start_date"
+                app:setDate="@{trip.endAt}" />
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/select_members"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toTopOf="@id/users"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/end_date" />
+
+            <ToggleButton
+                android:id="@+id/select_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/white_rounded_background"
-                android:elevation="10dp"
-                android:hint="@string/trip_name"
-                android:padding="@dimen/_12sdp"
-                android:text="@={trip.name}"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                android:checked="false"
+                android:elevation="0dp"
+                android:fontFamily="@font/nunito_regular"
+                android:padding="0dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextBlack"
+                android:textOff="@string/select_all"
+                android:textOn="@string/unselect_all"
+                app:layout_constraintBottom_toTopOf="@id/users"
+                app:layout_constraintEnd_toStartOf="@id/add_user"
+                app:layout_constraintTop_toBottomOf="@id/end_date" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:backgroundTint="@color/colorBtnBlue"
+                android:fontFamily="@font/nunito_semibold"
+                android:text="@string/add"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/end_date" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/users"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:nestedScrollingEnabled="false"
                 android:paddingVertical="@dimen/_6sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/trip_name" />
+                app:layout_constraintTop_toBottomOf="@id/add_user" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/add_user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/add_member"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/users" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

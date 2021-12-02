@@ -10,13 +10,13 @@ val networkModule = module {
     single {
         FirebaseHelper()
     }
-    single {
+    factory {
         MainRepository(get())
     }
-    single {
+    factory {
         TripRepository(get())
     }
-    single {
+    factory {
         UserRepository(get())
     }
 }

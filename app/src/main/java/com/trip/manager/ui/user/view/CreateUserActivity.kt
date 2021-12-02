@@ -18,6 +18,7 @@ class CreateUserActivity : BaseActivity<UserViewModel>(UserViewModel::class) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_user)
         init()
+        viewModel.getUsers()
     }
 
     private fun init() {
@@ -26,10 +27,16 @@ class CreateUserActivity : BaseActivity<UserViewModel>(UserViewModel::class) {
         binding.save.setOnClickListener {
             viewModel.validateAndCreateUser(binding.user ?: User()).observe(this, createUserObserver)
         }
+        viewModel.userData.observe(this, userListObserver)
     }
 
     private val createUserObserver = Observer<Response<Any>> {
         if (it.success) onBackPressed()
         else showShortToast(it.error)
+    }
+
+    private val userListObserver = Observer<Response<List<User>>> {
+        viewModel.loading.value = false
+        if (!it.success) onBackPressed()
     }
 }

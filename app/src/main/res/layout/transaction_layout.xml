@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.trip.manager.utils.DateTimeUtilsKt" />
+
+        <import type="com.trip.manager.utils.TransactionType" />
+
+        <variable
+            name="transaction"
+            type="com.trip.manager.ui.trip.model.Transaction" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@drawable/white_rounded_background"
+        android:elevation="@dimen/_5sdp"
+        android:padding="@dimen/_10sdp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/send_icon"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="@{transaction.title}"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/money_icon"
+            android:drawablePadding="@dimen/_3sdp"
+            android:drawableTint="@color/colorTextBlack"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text='@{String.format("%s ",transaction.amount)}'
+            android:textColor='@{transaction.type.equals(TransactionType.DEBIT)? @android:color/holo_red_light : @android:color/holo_green_light }'
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/calendar_icon"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text='@{DateTimeUtilsKt.getFormattedDateTime(transaction.createdAt,DateTimeUtilsKt.appDateTime,false,false)}'
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/amount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/phone_icon"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="@{transaction.createdBy}"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="@{transaction.description}"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/_11ssp"
+            android:visibility="@{transaction.description.length()==0? View.GONE :View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

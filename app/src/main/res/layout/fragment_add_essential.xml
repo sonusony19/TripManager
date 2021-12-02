@@ -33,6 +33,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/add_essentials"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/done"
+                app:layout_constraintStart_toStartOf="@id/back"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/done"
                 android:layout_width="wrap_content"
@@ -45,31 +57,37 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/essential_name"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_14sdp"
-            android:background="@drawable/white_rounded_background"
-            android:elevation="10dp"
-            android:hint="@string/essential_name"
-            android:padding="@dimen/_12sdp"
-            android:text="@={essential.name}"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="@string/essential_name"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:text="@={essential.name}"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
             android:id="@+id/responsible_person"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_14sdp"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:background="@drawable/white_rounded_background"
-            android:elevation="10dp"
-            android:hint="@string/responsible_person"
-            android:padding="@dimen/_12sdp"
-            android:text="@={essential.responsible}"
-            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/gray_box"
+            android:minHeight="@dimen/_40sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:popupBackground="@drawable/white_rounded_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/essential_name" />
 

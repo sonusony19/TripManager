@@ -2,7 +2,6 @@ package com.trip.manager.baseclasses
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -12,22 +11,27 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kaptain.hr.dialogx.DialogxBuilder
 import com.trip.manager.R
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.reflect.KClass
 
-open class BaseDialogFragment : BottomSheetDialogFragment(), DialogInterface.OnShowListener, DialogInterface.OnDismissListener {
+open class BaseDialogFragment<V : BaseViewModel>(private val viewModelClass: KClass<V>) : BottomSheetDialogFragment(), DialogInterface.OnShowListener, DialogInterface.OnDismissListener {
 
-    lateinit var mContext: Context
+    lateinit var viewModel: V
+    var dialog: DialogxBuilder? = null
 
     override fun getTheme(): Int = R.style.BottomSheetDialog
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        this.mContext = context
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.BottomSheetDialog)
+        viewModel = getViewModel(viewModelClass)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -38,6 +42,10 @@ open class BaseDialogFragment : BottomSheetDialogFragment(), DialogInterface.OnS
             true
         }
         return dialog
+    }
+
+    private fun init() {
+        viewModel.loading.observe(viewLifecycleOwner) { (requireActivity() as BaseActivity<*>).viewModel.loading.value = it }
     }
 
     open fun showOnFullScreen(dialog: BottomSheetDialog) {
@@ -61,9 +69,7 @@ open class BaseDialogFragment : BottomSheetDialogFragment(), DialogInterface.OnS
         sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    fun onBackPressed() {
-        dismiss()
-    }
+    fun onBackPressed() = dismiss()
 
     override fun onShow(dialog: DialogInterface?) {
     }

@@ -7,9 +7,12 @@ import com.trip.manager.utils.getStringResource
 
 data class Trip(
         var id: String = "",
-        var name: String? = null,
+        var name: String = "",
         var createdAt: Long = 0L,
-        var members: List<String> = arrayListOf()
+        var createdBy: String = "",
+        var startAt: Long? = null,
+        var endAt: Long? = null,
+        var members: List<String> = arrayListOf(),
 )
 
 data class Member(
@@ -25,10 +28,12 @@ data class Essential(
         var id: String = "",
         var name: String = "",
         var createdAt: Long = 0L,
-        var handledAt: Long = 0L,
+        var createdBy: String = "",
+        var handledAt: Long? = null,
         var updatedAt: Long = 0L,
         var responsible: String = "",
-        var handledBy: String = ""
+        var handledBy: String = "",
+        var updatedBy: String = "",
 )
 
 data class Transaction(
@@ -37,5 +42,6 @@ data class Transaction(
         var title: String = "",
         var description: String = "",
         var createdAt: Long = 0L,
-        var type: String = TransactionType.CREDIT
+        var createdBy: String = "",
+        var type: String = TransactionType.CREDIT,
 )

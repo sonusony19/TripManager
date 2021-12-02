@@ -14,4 +14,5 @@ open class BaseViewModel : ViewModel(), KoinComponent {
 
     fun checkLoginStatus() = MutableLiveData(firebaseHelper.auth.currentUser != null)
     fun logout() = firebaseHelper.auth.signOut()
+    fun getCurrentUser() = firebaseHelper.auth.currentUser
 }

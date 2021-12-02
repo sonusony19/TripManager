@@ -10,7 +10,7 @@ import com.trip.manager.R
 import com.trip.manager.databinding.MemberLayoutBinding
 import com.trip.manager.ui.trip.model.Member
 
-class MemberAdapter(private val context: Context, private val members: List<Member>) : RecyclerView.Adapter<MemberAdapter.MyViewHolder>() {
+class MemberAdapter(private val context: Context, private val members: List<Member>, private val listener: View.OnClickListener?) : RecyclerView.Adapter<MemberAdapter.MyViewHolder>() {
 
     val selectedMembers = arrayListOf<Member>()
     private var selectionMode: Boolean = false
@@ -22,7 +22,8 @@ class MemberAdapter(private val context: Context, private val members: List<Memb
 
     override fun onBindViewHolder(holder: MemberAdapter.MyViewHolder, position: Int) {
         holder.binding.member = members[position]
-        holder.binding.checkbox.visibility = if (selectionMode) View.VISIBLE else View.GONE
+        holder.binding.selectionMode = selectionMode
+        holder.binding.selected = selectedMembers.contains(members[position])
         holder.itemView.setOnClickListener {
             if (selectionMode) {
                 if (selectedMembers.contains(members[position])) {
@@ -32,7 +33,8 @@ class MemberAdapter(private val context: Context, private val members: List<Memb
                 }
                 holder.binding.selected = selectedMembers.contains(members[position])
             } else {
-
+                it.tag = members[position].id
+                listener?.onClick(it)
             }
         }
     }
@@ -42,6 +44,12 @@ class MemberAdapter(private val context: Context, private val members: List<Memb
     fun setSelectionMode(mode: Boolean): MemberAdapter {
         selectionMode = mode
         return this
+    }
+
+    fun selectDeselect(checked: Boolean) {
+        selectedMembers.clear()
+        if (checked) selectedMembers.addAll(members)
+        notifyDataSetChanged()
     }
 
 }

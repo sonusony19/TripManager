@@ -13,15 +13,13 @@ import com.trip.manager.baseclasses.Response
 import com.trip.manager.databinding.FragmentEssentialsBinding
 import com.trip.manager.ui.trip.model.Essential
 import com.trip.manager.ui.trip.viewmodel.TripViewModel
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 private const val TRIP_ID = "TRIP_ID"
 
-class EssentialsFragment : BaseFragment() {
+class EssentialsFragment : BaseFragment<TripViewModel>(TripViewModel::class) {
 
     private var tripId: String = ""
     private lateinit var binding: FragmentEssentialsBinding
-    private lateinit var viewModel: TripViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +35,6 @@ class EssentialsFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_essentials, container, false)
-        viewModel = getViewModel(TripViewModel::class)
         init()
         viewModel.getEssentials(tripId)
         return binding.root
@@ -53,8 +50,12 @@ class EssentialsFragment : BaseFragment() {
     private val essentialsObserver = Observer<Response<List<Essential>>> {
         if (it.success && !it.data.isNullOrEmpty()) {
             binding.noData.visibility = View.GONE
-            binding.essentials.adapter = EssentialAdapter(requireContext(), it.data) {}
+            binding.essentials.visibility = View.VISIBLE
+            binding.essentials.adapter = EssentialAdapter(requireContext(), it.data) { view ->
+                EssentialDetailsFragment.newInstance(tripId, view.tag as? String ?: "").show(childFragmentManager, "")
+            }
         } else {
+            binding.essentials.visibility = View.GONE
             binding.noData.visibility = View.VISIBLE
         }
     }

@@ -9,20 +9,72 @@
             type="com.trip.manager.ui.trip.model.Trip" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_10sdp">
+        android:layout_height="@dimen/_85sdp"
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@drawable/white_rounded_background"
+        android:elevation="@dimen/_10sdp"
+        android:padding="@dimen/_12sdp">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_semibold"
             android:gravity="center"
-            android:text="@{trip.name}" />
+            android:text="@{trip.name + String.format(@string/_members,trip.members.size)}"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/planned_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:drawableStart="@drawable/calendar_icon"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_regular"
+            android:gravity="center"
+            android:textColor="@color/colorTextGray"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            app:setDate="@{trip.createdAt}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:drawableStart="@drawable/start_circle"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planned_date"
+            app:setDate="@{trip.startAt}" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:drawableStart="@drawable/end_circle"
+            android:drawablePadding="@dimen/_3sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/planned_date"
+            app:setDate="@{trip.endAt}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

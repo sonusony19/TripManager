@@ -32,6 +32,7 @@ class TripDetailsActivity : BaseActivity<TripViewModel>(TripViewModel::class) {
     }
 
     private fun getData() {
+        binding.back.setOnClickListener { onBackPressed() }
         viewModel.getTripDetails(intent.getStringExtra("ID") ?: "")
     }
 

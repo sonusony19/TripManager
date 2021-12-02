@@ -9,7 +9,7 @@ import com.trip.manager.utils.databaseError
 
 open class BaseRepository {
 
-    var databaseAndListener = hashMapOf<DatabaseReference, ValueEventListener>()
+    var databaseAndListener = arrayListOf<Pair<DatabaseReference, ValueEventListener>>()
 
     fun setObject(database: DatabaseReference, data: Any, firebaseDataListener: FirebaseDataListener<String>? = null) {
         database.setValue(data).addOnCompleteListener {
@@ -22,6 +22,13 @@ open class BaseRepository {
         database.updateChildren(data).addOnCompleteListener {
             if (it.isSuccessful) firebaseDataListener?.onSuccess(database.key ?: "")
             else firebaseDataListener?.onFailure(it.exception?.localizedMessage ?: databaseError)
+        }
+    }
+
+    fun removeObject(database: DatabaseReference, listener: FirebaseDataListener<Any>?) {
+        database.removeValue().addOnCompleteListener {
+            if (it.isSuccessful) listener?.onSuccess(Any())
+            else listener?.onFailure(it.exception?.localizedMessage ?: databaseError)
         }
     }
 
@@ -42,7 +49,7 @@ open class BaseRepository {
         if (once) database.addListenerForSingleValueEvent(databaseListener)
         else {
             database.addValueEventListener(databaseListener)
-            databaseAndListener[database] = databaseListener
+            databaseAndListener.add(Pair(database, databaseListener))
         }
     }
 
@@ -63,14 +70,12 @@ open class BaseRepository {
         if (once) database.addListenerForSingleValueEvent(databaseListener)
         else {
             database.addValueEventListener(databaseListener)
-            databaseAndListener[database] = databaseListener
+            databaseAndListener.add(Pair(database, databaseListener))
         }
     }
 
     fun removeListener() {
-        databaseAndListener.keys.forEach { database ->
-            databaseAndListener[database]?.let { it -> database.removeEventListener(it) }
-        }
+        databaseAndListener.forEach { it.first.removeEventListener(it.second) }
         databaseAndListener.clear()
     }
 

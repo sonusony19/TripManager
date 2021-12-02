@@ -11,7 +11,7 @@ import com.trip.manager.ui.user.model.User
 
 class UserAdapter(private val context: Context, private val users: List<User>) : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
-    val selectedUsers = arrayListOf<User>()
+    var selectedUsers = arrayListOf<User>()
 
     inner class MyViewHolder(val binding: UserItemViewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -20,6 +20,7 @@ class UserAdapter(private val context: Context, private val users: List<User>) :
 
     override fun onBindViewHolder(holder: UserAdapter.MyViewHolder, position: Int) {
         holder.binding.user = users[position]
+        holder.binding.selected = selectedUsers.contains(users[position])
         holder.itemView.setOnClickListener {
             if (selectedUsers.contains(users[position])) {
                 selectedUsers.remove(users[position])
@@ -28,6 +29,12 @@ class UserAdapter(private val context: Context, private val users: List<User>) :
             }
             holder.binding.selected = selectedUsers.contains(users[position])
         }
+    }
+
+    fun selectDeselect(checked: Boolean) {
+        selectedUsers.clear()
+        if (checked) selectedUsers.addAll(users)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = users.size

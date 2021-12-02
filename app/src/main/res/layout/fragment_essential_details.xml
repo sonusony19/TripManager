@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="essential"
+            type="com.trip.manager.ui.trip.model.Essential" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/white_rounded_background"
+        android:orientation="vertical"
+        tools:context=".ui.trip.view.EssentialDetailsFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:paddingHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/back_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/essentials"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="@string/essential_name"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:text="@={essential.name}"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/handled_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:buttonTint="@color/colorBtnBlue"
+            android:checked="@{essential.handledAt!=null}"
+            android:fontFamily="@font/nunito_regular"
+            android:text="@string/handled" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/handled_by"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:visibility="@{essential.handledAt!=null? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="@string/handled_by"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:text="@={essential.handledBy}"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginVertical="@dimen/_20sdp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorTextBlack"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@android:string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorBtnBlue"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
