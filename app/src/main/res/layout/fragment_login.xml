@@ -31,7 +31,6 @@
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/login"
-                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_20ssp" />
 
 
@@ -59,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/colorTextBlack">
+                app:passwordToggleTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -69,10 +68,9 @@
                     android:gravity="center_vertical"
                     android:hint="@string/password"
                     android:imeOptions="actionDone"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:maxLines="1"
-                    android:text="@={loginRequest.password}"
-                    android:textColor="@color/black" />
+                    android:text="@={loginRequest.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -81,11 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_48sdp"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:backgroundTint="@color/colorBtnBlue"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/submit"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

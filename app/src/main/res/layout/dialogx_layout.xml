@@ -28,7 +28,6 @@
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/_12sdp"
                 android:textAlignment="center"
-                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_13ssp" />
 
 
@@ -40,26 +39,24 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/negative_button"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_weight="1"
-                    android:backgroundTint="@android:color/holo_red_light"
                     android:fontFamily="@font/nunito_bold"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textAllCaps="false" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/positive_button"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/colorBtnBlue"
                     android:fontFamily="@font/nunito_bold"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:textAllCaps="false" />
 
             </LinearLayout>
 

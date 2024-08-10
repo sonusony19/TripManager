@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:indeterminateTint="@color/colorTextBlack"
-        android:progressTint="@color/colorTextBlack" />
+        android:indeterminateTint="@color/black"
+        android:progressTint="@color/black" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +21,6 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:fontFamily="@font/nunito_bold"
         android:text="@string/please_wait"
-        android:textColor="@color/colorTextBlack"
         android:textSize="@dimen/_24ssp" />
 
 </LinearLayout>

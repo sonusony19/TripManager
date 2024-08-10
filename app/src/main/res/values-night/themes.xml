@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.TripManager" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.TripManager" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -57,56 +57,4 @@
         <item name="colorOnYellowContainer">@color/colorOnYellowContainer</item>
     </style>
 
-
-    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <!--<item name="android:windowCloseOnTouchOutside">false</item>-->
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:backgroundDimAmount">0.3</item>
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-    </style>
-
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/white</item>
-        <item name="android:navigationBarColor">@color/white</item>
-        <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <style name="TextInputLayoutStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/black</item>
-        <item name="android:theme">@style/exampleCursor</item>
-    </style>
-
-    <style name="exampleCursor" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox">
-        <item name="colorControlActivated">@color/black</item>
-    </style>
-
-    <style name="DateTimePickerTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="android:fontFamily">@font/nunito_regular</item>
-        <item name="android:buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonStyle</item>
-        <item name="android:buttonBarPositiveButtonStyle">@style/DatePickerTheme.ButtonStyle</item>
-    </style>
-
-    <style name="DatePickerTheme.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/colorBtnBlue</item>
-        <item name="fontFamily">@font/nunito_bold</item>
-    </style>
-
-    <style name="DialogxStyle" parent="ThemeOverlay.AppCompat.Dialog.Alert">
-        <item name="android:windowAnimationStyle">@style/DialogxAnimation</item>
-    </style>
-
-    <style name="DialogxAnimation">
-        <item name="android:windowEnterAnimation">@anim/dialog_in_animation</item>
-        <item name="android:windowExitAnimation">@anim/dialog_exit_animation</item>
-    </style>
 </resources>

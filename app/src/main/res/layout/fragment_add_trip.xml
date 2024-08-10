@@ -44,7 +44,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_bold"
                     android:text="@string/add_your_trip"
-                    android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/_14ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/done"
@@ -80,8 +79,7 @@
                     android:hint="@string/trip_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:text="@={trip.name}"
-                    android:textColor="@color/black" />
+                    android:text="@={trip.name}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textview.MaterialTextView
@@ -96,7 +94,6 @@
                 android:gravity="center_vertical"
                 android:hint="@string/start_date_of_trip"
                 android:paddingHorizontal="@dimen/_14sdp"
-                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintTop_toBottomOf="@id/trip_name_layout"
                 app:setDate="@{trip.startAt}" />
@@ -113,7 +110,6 @@
                 android:gravity="center_vertical"
                 android:hint="@string/end_date_of_trip"
                 android:paddingHorizontal="@dimen/_14sdp"
-                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintTop_toBottomOf="@id/start_date"
                 app:setDate="@{trip.endAt}" />
@@ -126,7 +122,6 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/select_members"
-                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintBottom_toTopOf="@id/users"
                 app:layout_constraintStart_toStartOf="parent"
@@ -135,7 +130,7 @@
             <ToggleButton
                 android:id="@+id/select_toggle"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_24sdp"
+                android:layout_height="@dimen/_34sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/white_rounded_background"
@@ -144,7 +139,6 @@
                 android:fontFamily="@font/nunito_regular"
                 android:padding="0dp"
                 android:textAllCaps="false"
-                android:textColor="@color/colorTextBlack"
                 android:textOff="@string/select_all"
                 android:textOn="@string/unselect_all"
                 app:layout_constraintBottom_toTopOf="@id/users"
@@ -156,12 +150,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_14sdp"
+                style="@style/Widget.Material3.Button.ElevatedButton"
                 android:layout_marginVertical="@dimen/_5sdp"
-                android:backgroundTint="@color/colorBtnBlue"
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/add"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/end_date" />

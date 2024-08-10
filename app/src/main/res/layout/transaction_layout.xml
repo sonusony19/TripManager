@@ -34,7 +34,6 @@
             android:gravity="center"
             android:paddingVertical="@dimen/_5sdp"
             android:text="@{transaction.title}"
-            android:textColor="@color/colorTextBlack"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +44,6 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/money_icon"
             android:drawablePadding="@dimen/_3sdp"
-            android:drawableTint="@color/colorTextBlack"
             android:fontFamily="@font/nunito_semibold"
             android:gravity="center"
             android:paddingVertical="@dimen/_5sdp"
@@ -65,7 +63,6 @@
             android:gravity="center"
             android:paddingVertical="@dimen/_5sdp"
             android:text='@{DateTimeUtilsKt.getFormattedDateTime(transaction.createdAt,DateTimeUtilsKt.appDateTime,false,false)}'
-            android:textColor="@color/colorTextGray"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/amount" />
@@ -80,7 +77,6 @@
             android:gravity="center"
             android:paddingVertical="@dimen/_5sdp"
             android:text="@{transaction.createdBy}"
-            android:textColor="@color/colorTextGray"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/date" />
@@ -92,7 +88,6 @@
             android:gravity="center"
             android:paddingVertical="@dimen/_5sdp"
             android:text="@{transaction.description}"
-            android:textColor="@color/colorTextGray"
             android:textSize="@dimen/_11ssp"
             android:visibility="@{transaction.description.length()==0? View.GONE :View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
