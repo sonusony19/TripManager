@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kaptain.hr.dialogx.DialogxBuilder
 import com.trip.manager.utils.showProgressDialog
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 import kotlin.reflect.KClass
 
 open class BaseActivity<V : BaseViewModel>(private val viewModelClass: KClass<V>) : AppCompatActivity() {
@@ -16,7 +16,7 @@ open class BaseActivity<V : BaseViewModel>(private val viewModelClass: KClass<V>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel(viewModelClass)
+        viewModel = viewModelForClass(clazz = viewModelClass).value
         init()
     }
 

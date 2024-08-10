@@ -36,10 +36,14 @@ open class BaseRepository {
     inline fun <reified T> listenToObject(database: DatabaseReference, model: Class<*>, firebaseDataListener: FirebaseDataListener<T>, once: Boolean = false) {
         val databaseListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.getValue(model)?.let {
-                    if (it is T) firebaseDataListener.onSuccess(it)
-                    else firebaseDataListener.onFailure(databaseError)
-                } ?: firebaseDataListener.onFailure(databaseError)
+                try {
+                    snapshot.getValue(model)?.let {
+                        if (it is T) firebaseDataListener.onSuccess(it)
+                        else firebaseDataListener.onFailure(databaseError)
+                    } ?: firebaseDataListener.onFailure(databaseError)
+                } catch (e: Exception) {
+                    firebaseDataListener.onFailure(databaseError)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -58,7 +62,11 @@ open class BaseRepository {
             override fun onDataChange(parentSnapshot: DataSnapshot) {
                 val temp = arrayListOf<T>()
                 parentSnapshot.children.forEach { snapshot ->
-                    snapshot.getValue(model)?.let { if (it is T) temp.add(it) }
+                    try {
+                        snapshot.getValue(model)?.let { if (it is T) temp.add(it) }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 firebaseDataListener.onSuccess(temp)
             }

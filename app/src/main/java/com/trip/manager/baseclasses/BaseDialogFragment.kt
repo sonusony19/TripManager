@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kaptain.hr.dialogx.DialogxBuilder
 import com.trip.manager.R
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 import kotlin.reflect.KClass
 
 open class BaseDialogFragment<V : BaseViewModel>(private val viewModelClass: KClass<V>) : BottomSheetDialogFragment(), DialogInterface.OnShowListener, DialogInterface.OnDismissListener {
@@ -26,7 +26,7 @@ open class BaseDialogFragment<V : BaseViewModel>(private val viewModelClass: KCl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.BottomSheetDialog)
-        viewModel = getViewModel(viewModelClass)
+        viewModel = viewModelForClass(clazz = viewModelClass).value
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

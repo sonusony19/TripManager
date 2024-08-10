@@ -9,13 +9,13 @@ import com.trip.manager.utils.FirebasePaths
 class UserRepository(private val firebaseHelper: FirebaseHelper) : BaseRepository() {
 
     fun createNewUser(user: User, listener: FirebaseDataListener<String>) {
-        var database = firebaseHelper.database.getReference("Users")
+        var database = firebaseHelper.database.child(FirebasePaths.users)
         database = database.push()
         user.uid = database.key ?: ""
         setObject(database, user, listener)
     }
 
     fun getUsers(listener: FirebaseDataListener<List<User>>) {
-        listenToList(firebaseHelper.database.getReference(FirebasePaths.users), User::class.java, listener)
+        listenToList(firebaseHelper.database.child(FirebasePaths.users), User::class.java, listener)
     }
 }

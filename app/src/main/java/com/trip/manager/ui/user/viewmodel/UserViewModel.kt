@@ -8,7 +8,7 @@ import com.trip.manager.listeners.FirebaseDataListener
 import com.trip.manager.network.UserRepository
 import com.trip.manager.ui.user.model.User
 import com.trip.manager.utils.getStringResource
-import java.util.*
+import java.util.Locale
 
 class UserViewModel(private val repository: UserRepository) : BaseViewModel() {
 
@@ -51,5 +51,14 @@ class UserViewModel(private val repository: UserRepository) : BaseViewModel() {
             }
         })
         return response
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        removeListener()
+    }
+
+    fun removeListener() {
+        repository.removeListener()
     }
 }

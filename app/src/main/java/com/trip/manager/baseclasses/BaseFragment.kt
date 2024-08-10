@@ -3,7 +3,7 @@ package com.trip.manager.baseclasses
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 import kotlin.reflect.KClass
 
 open class BaseFragment<V : BaseViewModel>(private val viewModelClass: KClass<V>) : Fragment() {
@@ -11,7 +11,7 @@ open class BaseFragment<V : BaseViewModel>(private val viewModelClass: KClass<V>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = getViewModel(viewModelClass)
+        viewModel = viewModelForClass(clazz = viewModelClass).value
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

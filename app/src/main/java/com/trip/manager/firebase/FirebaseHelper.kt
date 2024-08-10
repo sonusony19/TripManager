@@ -4,17 +4,19 @@ import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
+import com.trip.manager.BuildConfig
 import com.trip.manager.listeners.FirebaseAuthListener
 import com.trip.manager.ui.login.model.LoginRequest
 import com.trip.manager.utils.authError
 import com.trip.manager.utils.databaseError
-import org.koin.core.KoinComponent
-import java.util.*
+import java.util.Locale
 
-class FirebaseHelper : KoinComponent {
+class FirebaseHelper {
 
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    val database = FirebaseDatabase.getInstance("https://trip-manager-e4ac1-default-rtdb.firebaseio.com/")
+    val database = FirebaseDatabase.getInstance().apply {
+        setPersistenceEnabled(true)
+    }.getReference(if (BuildConfig.DEBUG) "dev" else "prod")
 
     fun signInUser(loginRequest: LoginRequest, listener: FirebaseAuthListener) {
         auth.signInWithEmailAndPassword(loginRequest.email, loginRequest.password).addOnCompleteListener {
@@ -42,7 +44,7 @@ class FirebaseHelper : KoinComponent {
     }
 
     private fun updateUserInDatabase(email: String, listener: FirebaseAuthListener) {
-        val userDatabase = database.getReference("Users").child(auth.currentUser!!.uid)
+        val userDatabase = database.child("Users").child(auth.currentUser!!.uid)
         val user = hashMapOf<String, Any>()
         user["uid"] = auth.currentUser!!.uid
         user["name"] = "Sonu Sony"

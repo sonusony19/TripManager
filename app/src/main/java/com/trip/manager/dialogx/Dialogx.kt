@@ -25,7 +25,7 @@ class Dialogx {
     var dialogxBinding: DialogxLayoutBinding
 
 
-    constructor(builder: DialogxBuilder, context: Context?, message: String?, cancelable: Boolean) {
+    constructor(builder: DialogxBuilder, context: Context, message: String?, cancelable: Boolean) {
         negativeExist = false
         this.context = context
         this.builder = builder
@@ -40,7 +40,7 @@ class Dialogx {
         initEvents()
     }
 
-    constructor(builder: DialogxBuilder, context: Context?) {
+    constructor(builder: DialogxBuilder, context: Context) {
         this.builder = builder
         this.context = context
         dialog = AppCompatDialog(context, R.style.DialogxStyle)

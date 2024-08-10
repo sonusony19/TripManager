@@ -9,21 +9,22 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.trip.manager"
         minSdk 24
-        targetSdk 31
-        versionCode 3
-        versionName "1.0.2"
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,38 +38,37 @@ android {
 
     buildFeatures {
         dataBinding true
+        buildConfig true
     }
+    lint {
+        checkReleaseBuilds false
+        disable 'ContentDescription', 'Autofill', 'UseCompoundDrawables', 'NotifyDataSetChanged', 'RecyclerView', 'UnusedAttribute'
+    }
+    namespace 'com.trip.manager'
 
-    applicationVariants.all { variant ->
-        variant.outputs.all {
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
             def formattedDate = new Date().format('dd-MM-yyyy')
             outputFileName = "Trip Manager-${variant.name}-${formattedDate}.apk"
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        disable 'ContentDescription', 'Autofill', 'UseCompoundDrawables', 'NotifyDataSetChanged', 'RecyclerView', 'UnusedAttribute'
-    }
 }
 
 ext {
-    koin_version = "2.1.5"
-    retrofit = "2.9.0"
+    koin_version = "3.5.6"
+    retrofit = '2.11.0'
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     //android lifecycle
-    def lifecycle_version = "2.4.0"
+    def lifecycle_version = '2.8.4'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -77,32 +77,30 @@ dependencies {
     // Multidex
     implementation "androidx.multidex:multidex:2.0.1"
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    implementation platform('com.google.firebase:firebase-bom:33.1.2')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-perf'
-    implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0-beta03'
     //Preferences
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     //Permissions
     implementation 'com.karumi:dexter:6.2.3'
     //Dimensions
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.1.1'
+    implementation 'com.intuit.ssp:ssp-android:1.1.1'
     //for images
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // Koin
-    implementation "org.koin:koin-androidx-scope:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
     //retrofit
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
     //coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
     //lottie files
-    implementation 'com.airbnb.android:lottie:4.2.1'
+    implementation 'com.airbnb.android:lottie:6.5.0'
 }

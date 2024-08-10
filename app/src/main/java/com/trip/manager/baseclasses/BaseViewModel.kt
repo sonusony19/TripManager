@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.trip.manager.firebase.FirebaseHelper
 import com.trip.manager.helpers.PrefHelper
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 open class BaseViewModel : ViewModel(), KoinComponent {
     val firebaseHelper: FirebaseHelper by inject()
